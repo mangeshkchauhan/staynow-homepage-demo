@@ -115,7 +115,7 @@ export default function WhyStayNowSection() {
 			gradient: "from-blue-500 to-cyan-500",
 			className: "min-h-[280px] md:min-h-[190px] md:col-span-1",
 			imageUrl:
-				"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
+				"9.avif",
 		},
 		{
 			icon: Shield,

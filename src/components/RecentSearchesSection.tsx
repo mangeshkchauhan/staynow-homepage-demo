@@ -8,7 +8,7 @@ export default function RecentSearchesSection() {
 			dates: "Mar 15 - Mar 22",
 			guests: "2 Adults",
 			image:
-				"https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=400&q=80",
+				"6.jpeg",
 			progress: 65,
 		},
 		{
@@ -17,7 +17,7 @@ export default function RecentSearchesSection() {
 			dates: "Apr 10 - Apr 17",
 			guests: "4 Adults, 2 Children",
 			image:
-				"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&q=80",
+				"8.jpeg",
 			progress: 30,
 		},
 		{
@@ -26,7 +26,7 @@ export default function RecentSearchesSection() {
 			dates: "May 5 - May 12",
 			guests: "2 Adults",
 			image:
-				"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&q=80",
+				"7.jpeg",
 			progress: 85,
 		},
 	];

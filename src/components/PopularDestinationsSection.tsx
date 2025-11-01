@@ -1,4 +1,4 @@
-import { TrendingUp, Star, ArrowRight } from "lucide-react";
+import { ArrowRight, Star, TrendingUp } from "lucide-react";
 
 export default function PopularDestinationsSection() {
 	const destinations = [
@@ -7,7 +7,7 @@ export default function PopularDestinationsSection() {
 			name: "Bali, Indonesia",
 			description: "Tropical paradise with stunning beaches",
 			image:
-				"https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",
+				"5.jpeg",
 			rating: 4.8,
 			deals: "From $45/night",
 			tag: "Beach Paradise",
@@ -26,8 +26,7 @@ export default function PopularDestinationsSection() {
 			id: 3,
 			name: "Tokyo, Japan",
 			description: "Modern meets tradition",
-			image:
-				"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+			image: "2.jpeg",
 			rating: 4.7,
 			deals: "From $67/night",
 			tag: "Cultural Hub",
@@ -36,8 +35,7 @@ export default function PopularDestinationsSection() {
 			id: 4,
 			name: "Maldives",
 			description: "Luxury overwater villas",
-			image:
-				"https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+			image: "3.jpeg",
 			rating: 4.9,
 			deals: "From $125/night",
 			tag: "Luxury Escape",
@@ -56,8 +54,7 @@ export default function PopularDestinationsSection() {
 			id: 6,
 			name: "Santorini, Greece",
 			description: "Iconic white and blue architecture",
-			image:
-				"https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+			image: "4.jpeg",
 			rating: 4.8,
 			deals: "From $78/night",
 			tag: "Scenic Beauty",
@@ -125,4 +122,3 @@ export default function PopularDestinationsSection() {
 		</section>
 	);
 }
-

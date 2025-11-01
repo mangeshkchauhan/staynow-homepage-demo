@@ -15,7 +15,7 @@ export default function HeroSection() {
 		>
 			{/* Background Image */}
 			<img
-				src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070"
+				src="banner.avif"
 				alt=""
 				loading="eager"
 				decoding="async"
