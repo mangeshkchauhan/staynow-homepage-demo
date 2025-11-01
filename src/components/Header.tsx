@@ -1,27 +1,21 @@
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [isScrolled, setIsScrolled] = useState(false);
-
-	useEffect(() => {
-		const onScroll = () => {
-			setIsScrolled(window.scrollY > 8);
-		};
-		onScroll();
-		window.addEventListener("scroll", onScroll, { passive: true });
-		return () => window.removeEventListener("scroll", onScroll);
-	}, []);
 
 	return (
 		<header
-			className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-neutral-200 transition-colors duration-300 ${isScrolled ? "bg-white/95 shadow-sm" : "bg-white/80"}`}
+			className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-neutral-200 transition-colors duration-300 bg-white shadow-sm`}
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					{/* Logo */}
-					<a href="/" aria-label="Home" className="flex items-center space-x-2 group">
+					<a
+						href="/"
+						aria-label="Home"
+						className="flex items-center space-x-2 group"
+					>
 						<img
 							src="/StayNowWhite.9e74a41c.png"
 							alt="StayNow"
