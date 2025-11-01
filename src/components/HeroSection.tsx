@@ -29,16 +29,15 @@ export default function HeroSection() {
 				{/* Hero Content */}
 				<div className="mb-6 sm:mb-8">
 					<h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-						Let <span className="text-violet-300">AI</span> plan your
+						Your dream vacation,
 						<br />
-						<span className="bg-linear-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
-							perfect trip
+						perfectly{" "}
+						<span className="bg-linear-to-r from-indigo-400 to-purple-600 bg-clip-text text-transparent">
+							planned by NowAI
 						</span>
 					</h1>
 					<p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed">
-						Tell us where you want to go or ask our{" "}
-						<span className="text-violet-300 font-medium">AI</span> to plan it
-						for you.
+						Discover hidden gems and seamless itineraries with AI-powered planning.
 					</p>
 				</div>
 
