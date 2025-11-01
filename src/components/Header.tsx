@@ -28,9 +28,9 @@ export default function Header() {
 						className="flex items-center space-x-2 group cursor-pointer"
 					>
 						<img
-							src="/StayNowWhite.9e74a41c.png"
+							src={ isScrolled ? "/dark.png" : "/white.png" }
 							alt="StayNow"
-							className="h-8 md:h-9 w-auto drop-shadow"
+							className="h-10 md:h-11 w-auto drop-shadow"
 						/>
 					</a>
 
