@@ -7,8 +7,7 @@ export default function RecentSearchesSection() {
 			destination: "Santorini, Greece",
 			dates: "Mar 15 - Mar 22",
 			guests: "2 Adults",
-			image:
-				"6.jpeg",
+			image: "6.jpeg",
 			progress: 65,
 		},
 		{
@@ -16,8 +15,7 @@ export default function RecentSearchesSection() {
 			destination: "Dubai, UAE",
 			dates: "Apr 10 - Apr 17",
 			guests: "4 Adults, 2 Children",
-			image:
-				"8.jpeg",
+			image: "8.jpeg",
 			progress: 30,
 		},
 		{
@@ -25,8 +23,7 @@ export default function RecentSearchesSection() {
 			destination: "Kyoto, Japan",
 			dates: "May 5 - May 12",
 			guests: "2 Adults",
-			image:
-				"7.jpeg",
+			image: "7.jpeg",
 			progress: 85,
 		},
 	];
@@ -42,9 +39,15 @@ export default function RecentSearchesSection() {
 						</h2>
 					</div>
 					<button
+						onClick={() => {
+							window.open(
+								"https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+								"_blank",
+							);
+						}}
+						rel="noopener noreferrer"
 						type="button"
-						className="text-indigo-600 hover:text-indigo-700 font-medium text-sm"
-						onClick={() => {}}
+						className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm px-6 py-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md"
 					>
 						View All
 					</button>

@@ -70,7 +70,7 @@ function BentoCard({
 				</p>
 				{stats ? (
 					<div
-						className={`mt-auto inline-flex items-center gap-2 rounded-full ${imageUrl ? "bg-white/20 ring-1 ring-white/30 backdrop-blur-sm" : `bg-linear-to-r ${gradient}`} px-3 py-1.5 ${imageUrl ? "text-white drop-shadow-md" : "text-white"} text-xs md:text-sm font-semibold`}
+						className={`mt-auto mr-auto inline-flex items-center gap-2 rounded-full ${imageUrl ? "bg-white/20 ring-1 ring-white/30 backdrop-blur-sm" : `bg-linear-to-r ${gradient}`} px-3 py-1.5 ${imageUrl ? "text-white drop-shadow-md" : "text-white"} text-xs md:text-sm font-semibold`}
 					>
 						<span>{stats}</span>
 						<span className="inline-block h-1.5 w-1.5 rounded-full bg-white/80 animate-pulse-soft" />
@@ -99,8 +99,7 @@ export default function WhyStayNowSection() {
 		{
 			icon: DollarSign,
 			title: "Best Price Guarantee",
-			description:
-				"We compare top sites and beat the lowest price by 10%.",
+			description: "We compare top sites and beat the lowest price by 10%.",
 			stats: "Save up to 40%",
 			gradient: "from-green-500 to-emerald-500",
 			className: "min-h-[280px] md:min-h-[190px] md:col-span-1",
@@ -114,8 +113,7 @@ export default function WhyStayNowSection() {
 			stats: "In 190+ countries",
 			gradient: "from-blue-500 to-cyan-500",
 			className: "min-h-[280px] md:min-h-[190px] md:col-span-1",
-			imageUrl:
-				"9.avif",
+			imageUrl: "9.avif",
 		},
 		{
 			icon: Shield,
@@ -131,7 +129,8 @@ export default function WhyStayNowSection() {
 		{
 			icon: Clock,
 			title: "Save 10+ Hours",
-			description: "Our AI compares thousands of options so you don't waste time.",
+			description:
+				"Our AI compares thousands of options so you don't waste time.",
 			stats: "5 min avg. planning",
 			gradient: "from-indigo-500 to-purple-500",
 			className: "min-h-[280px] md:min-h-[220px] md:col-span-2",
@@ -174,43 +173,44 @@ export default function WhyStayNowSection() {
 		// biome-ignore lint: #about used by header navigation
 		<section id="about" className="py-24 bg-neutral-50">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			{/* Header */}
-			<div className="relative mb-14 text-center">
-				<div className="pointer-events-none absolute inset-0 -z-10 mask-radial-fade bg-linear-to-br from-indigo-500/15 via-purple-500/10 to-pink-500/10" />
-				<h2 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">
-					Everything You Need for the{" "}
-					<span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
-						Perfect Stay
-					</span>
-				</h2>
-				<p className="mt-4 text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
-					From AI-powered recommendations to 24/7 support, we've built the ultimate platform to make your travel planning effortless.
-				</p>
-			</div>
+				{/* Header */}
+				<div className="relative mb-14 text-center">
+					<div className="pointer-events-none absolute inset-0 -z-10 mask-radial-fade bg-linear-to-br from-indigo-500/15 via-purple-500/10 to-pink-500/10" />
+					<h2 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">
+						Everything You Need for the{" "}
+						<span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
+							Perfect Stay
+						</span>
+					</h2>
+					<p className="mt-4 text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
+						From AI-powered recommendations to 24/7 support, we've built the
+						ultimate platform to make your travel planning effortless.
+					</p>
+				</div>
 
-			{/* Bento Grid */}
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-				{/* Row 1-2: AI Planner (2x2 hero) */}
-				<BentoCard {...items[0]} />
-				
-				{/* Row 1: Best Price (top right) */}
-				<BentoCard {...items[1]} />
-				
-				{/* Row 2: Hotels (middle right) */}
-				<BentoCard {...items[2]} />
+				{/* Bento Grid */}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+					{/* Row 1-2: AI Planner (2x2 hero) */}
+					<BentoCard {...items[0]} />
 
-				{/* Row 3: Secure + Save Time (spans 2) */}
-				<BentoCard {...items[3]} />
-				<BentoCard {...items[4]} />
+					{/* Row 1: Best Price (top right) */}
+					<BentoCard {...items[1]} />
 
-				{/* Row 4: Support + Rewards + Instant Booking */}
-				<BentoCard {...items[5]} />
-				<BentoCard {...items[6]} />
-				<BentoCard {...items[7]} />
-			</div>
+					{/* Row 2: Hotels (middle right) */}
+					<BentoCard {...items[2]} />
+
+					{/* Row 3: Secure + Save Time (spans 2) */}
+					<BentoCard {...items[3]} />
+					<BentoCard {...items[4]} />
+
+					{/* Row 4: Support + Rewards + Instant Booking */}
+					<BentoCard {...items[5]} />
+					<BentoCard {...items[6]} />
+					<BentoCard {...items[7]} />
+				</div>
 
 				{/* Subtle footer note */}
-				<div className="mt-10 text-center text-sm text-neutral-500">
+				<div className="mt-10 text-center text-base text-neutral-800">
 					Backed by real-time pricing, secure payments, and AI recommendations.
 				</div>
 			</div>
