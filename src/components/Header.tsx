@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -22,13 +21,13 @@ export default function Header() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					{/* Logo */}
-					<Link to="/" aria-label="Home" className="flex items-center space-x-2 group">
+					<a href="/" aria-label="Home" className="flex items-center space-x-2 group">
 						<img
 							src="/StayNowWhite.9e74a41c.png"
 							alt="StayNow"
 							className="h-8 md:h-9 w-auto drop-shadow"
 						/>
-					</Link>
+					</a>
 
 					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center space-x-8">
