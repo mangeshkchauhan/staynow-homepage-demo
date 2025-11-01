@@ -14,6 +14,9 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  server: {
+    preset: 'vercel',
+  },
 })
 
 export default config
