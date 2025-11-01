@@ -1,0 +1,21 @@
+{
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(ico|png|jpg|jpeg|gif|svg|webp|css|js|json|txt|xml|woff|woff2|ttf|eot))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/server"
+    }
+  ],
+  "outputDirectory": "dist/client"
+}
+
