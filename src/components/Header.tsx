@@ -1,177 +1,165 @@
-import { Link } from '@tanstack/react-router'
-
-import { useState } from 'react'
-import {
-  ChevronDown,
-  ChevronRight,
-  Home,
-  Menu,
-  Network,
-  SquareFunction,
-  StickyNote,
-  X,
-} from 'lucide-react'
+import { Link } from "@tanstack/react-router";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [groupedExpanded, setGroupedExpanded] = useState<
-    Record<string, boolean>
-  >({})
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 
-  return (
-    <>
-      <header className="p-4 flex items-center bg-gray-800 text-white shadow-lg">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu size={24} />
-        </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
-      </header>
+	useEffect(() => {
+		const onScroll = () => {
+			setIsScrolled(window.scrollY > 8);
+		};
+		onScroll();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
 
-      <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Navigation</h2>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-        </div>
+	return (
+		<header
+			className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-neutral-200 transition-colors duration-300 ${isScrolled ? "bg-white/95 shadow-sm" : "bg-white/80"}`}
+		>
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex items-center justify-between h-16">
+					{/* Logo */}
+					<Link to="/" aria-label="Home" className="flex items-center space-x-2 group">
+						<img
+							src="/StayNowWhite.9e74a41c.png"
+							alt="StayNow"
+							className="h-8 md:h-9 w-auto drop-shadow"
+						/>
+					</Link>
 
-        <nav className="flex-1 p-4 overflow-y-auto">
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Home size={20} />
-            <span className="font-medium">Home</span>
-          </Link>
+					{/* Desktop Navigation */}
+					<nav className="hidden md:flex items-center space-x-8">
+						<a
+							href="#features"
+							className="relative text-neutral-700/90 hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full"
+						>
+							Features
+						</a>
+						<a
+							href="#destinations"
+							className="relative text-neutral-700/90 hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full"
+						>
+							Destinations
+						</a>
+						<a
+							href="#how-it-works"
+							className="relative text-neutral-700/90 hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full"
+						>
+							How it Works
+						</a>
+						<a
+							href="#about"
+							className="relative text-neutral-700/90 hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full"
+						>
+							About
+						</a>
+					</nav>
 
-          {/* Demo Links Start */}
+					{/* CTA Buttons */}
+					<div className="hidden md:flex items-center space-x-3">
+						<button
+							type="button"
+							className="px-4 py-2 text-neutral-700 hover:text-indigo-600 font-medium transition-colors"
+						>
+							Sign In
+						</button>
+						<button
+							type="button"
+							className="px-4 py-2 rounded-lg bg-linear-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg transition-all font-medium"
+						>
+							Get Started
+						</button>
+					</div>
 
-          <Link
-            to="/demo/start/server-funcs"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <SquareFunction size={20} />
-            <span className="font-medium">Start - Server Functions</span>
-          </Link>
+					{/* Mobile Menu Button */}
+					<button
+						type="button"
+						className="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+						aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+						aria-expanded={isMenuOpen}
+						onClick={() => setIsMenuOpen(!isMenuOpen)}
+					>
+						{isMenuOpen ? (
+							<X className="w-6 h-6 text-neutral-700" />
+						) : (
+							<Menu className="w-6 h-6 text-neutral-700" />
+						)}
+					</button>
+				</div>
+			</div>
 
-          <Link
-            to="/demo/start/api-request"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Network size={20} />
-            <span className="font-medium">Start - API Request</span>
-          </Link>
-
-          <div className="flex flex-row justify-between">
-            <Link
-              to="/demo/start/ssr"
-              onClick={() => setIsOpen(false)}
-              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-              activeProps={{
-                className:
-                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-              }}
-            >
-              <StickyNote size={20} />
-              <span className="font-medium">Start - SSR Demos</span>
-            </Link>
-            <button
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              onClick={() =>
-                setGroupedExpanded((prev) => ({
-                  ...prev,
-                  StartSSRDemo: !prev.StartSSRDemo,
-                }))
-              }
-            >
-              {groupedExpanded.StartSSRDemo ? (
-                <ChevronDown size={20} />
-              ) : (
-                <ChevronRight size={20} />
-              )}
-            </button>
-          </div>
-          {groupedExpanded.StartSSRDemo && (
-            <div className="flex flex-col ml-4">
-              <Link
-                to="/demo/start/ssr/spa-mode"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">SPA Mode</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/full-ssr"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Full SSR</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/data-only"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Data Only</span>
-              </Link>
-            </div>
-          )}
-
-          {/* Demo Links End */}
-        </nav>
-      </aside>
-    </>
-  )
+			{/* Mobile Menu */}
+			{isMenuOpen && (
+				<div className="md:hidden border-t border-neutral-200 bg-white">
+					<div className="px-4 py-4 space-y-3">
+						<button
+							type="button"
+							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+							onClick={() => {
+								setIsMenuOpen(false);
+								document
+									.querySelector("#features")
+									?.scrollIntoView({ behavior: "smooth" });
+							}}
+						>
+							Features
+						</button>
+						<button
+							type="button"
+							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+							onClick={() => {
+								setIsMenuOpen(false);
+								document
+									.querySelector("#destinations")
+									?.scrollIntoView({ behavior: "smooth" });
+							}}
+						>
+							Destinations
+						</button>
+						<button
+							type="button"
+							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+							onClick={() => {
+								setIsMenuOpen(false);
+								document
+									.querySelector("#how-it-works")
+									?.scrollIntoView({ behavior: "smooth" });
+							}}
+						>
+							How it Works
+						</button>
+						<button
+							type="button"
+							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+							onClick={() => {
+								setIsMenuOpen(false);
+								document
+									.querySelector("#about")
+									?.scrollIntoView({ behavior: "smooth" });
+							}}
+						>
+							About
+						</button>
+						<div className="pt-3 space-y-2">
+							<button
+								type="button"
+								className="w-full px-4 py-2 text-neutral-700 border border-neutral-300 rounded-lg hover:bg-neutral-100 transition-colors font-medium"
+							>
+								Sign In
+							</button>
+							<button
+								type="button"
+								className="w-full px-4 py-2 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all font-medium"
+							>
+								Get Started
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+		</header>
+	);
 }
