@@ -44,7 +44,7 @@ export default function HeroSection() {
 
 				{/* Mode Toggle */}
 				<div className="mb-4 flex justify-center">
-					<div className="inline-flex items-center rounded-full p-1 bg-white/10 border border-white/20">
+					<div className="inline-flex items-center rounded-full gap-1 p-1 bg-white/10 border border-white/20">
 						<button
 							type="button"
 							onClick={() => setMode("ai")}
