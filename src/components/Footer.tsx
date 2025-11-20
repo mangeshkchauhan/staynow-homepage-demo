@@ -1,8 +1,8 @@
+import { Link } from "@tanstack/react-router";
 import {
 	Facebook,
 	Instagram,
 	Linkedin,
-	Smartphone,
 	Sparkles,
 	Twitter,
 	Youtube,
@@ -23,7 +23,10 @@ export default function Footer() {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
 					{/* Brand */}
 					<div className="lg:col-span-2">
-						<a href="/" className="flex items-center gap-2 mb-4 group cursor-pointer">
+						<Link
+							to="/"
+							className="flex items-center gap-2 mb-4 group cursor-pointer"
+						>
 							<div className="relative">
 								<Sparkles className="w-8 h-8 text-indigo-400 group-hover:text-indigo-300 transition-colors" />
 								<div className="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
@@ -31,7 +34,7 @@ export default function Footer() {
 							<span className="text-2xl font-bold bg-linear-to-r from-white to-neutral-300 bg-clip-text text-transparent">
 								StayNow
 							</span>
-						</a>
+						</Link>
 						<p className="text-neutral-400 mb-6 leading-relaxed">
 							Your AI-powered travel companion. Plan perfect trips, discover
 							amazing stays, and create unforgettable memories.

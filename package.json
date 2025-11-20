@@ -13,14 +13,19 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
+    "@tanstack/react-router": "^1.136.18",
     "lucide-react": "^0.544.0",
+    "pdfjs-dist": "4.4.168",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-pdf": "9.1.1",
     "tailwindcss": "^4.0.6",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
+    "@tanstack/react-router-devtools": "^1.136.18",
+    "@tanstack/router-plugin": "^1.136.18",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.10.2",

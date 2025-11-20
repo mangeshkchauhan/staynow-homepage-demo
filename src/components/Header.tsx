@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -22,17 +23,17 @@ export default function Header() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					{/* Logo */}
-					<a
-						href="/"
+					<Link
+						to="/"
 						aria-label="Home"
 						className="flex items-center space-x-2 group cursor-pointer"
 					>
 						<img
-							src={ isScrolled ? "/dark.png" : "/white.png" }
+							src={isScrolled ? "/dark.png" : "/white.png"}
 							alt="StayNow"
 							className="h-10 md:h-11 w-auto drop-shadow"
 						/>
-					</a>
+					</Link>
 
 					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center space-x-8">
@@ -48,12 +49,12 @@ export default function Header() {
 						>
 							Destinations
 						</a>
-						<a
-							href="#how-it-works"
+						<Link
+							to="/pdf"
 							className="relative  text-xl hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full cursor-pointer"
 						>
-							How it Works
-						</a>
+							PDF
+						</Link>
 						<a
 							href="#about"
 							className="relative  text-xl hover:text-indigo-600 transition-colors font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all hover:after:w-full cursor-pointer"
@@ -136,18 +137,13 @@ export default function Header() {
 						>
 							Destinations
 						</button>
-						<button
-							type="button"
+						<Link
+							to="/pdf"
 							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer"
-							onClick={() => {
-								setIsMenuOpen(false);
-								document
-									.querySelector("#how-it-works")
-									?.scrollIntoView({ behavior: "smooth" });
-							}}
+							onClick={() => setIsMenuOpen(false)}
 						>
-							How it Works
-						</button>
+							PDF
+						</Link>
 						<button
 							type="button"
 							className="block w-full text-left px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer"
