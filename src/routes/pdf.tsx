@@ -95,104 +95,40 @@ function PDFViewer() {
 
 					<div className="mb-4 text-sm text-slate-600">
 						<p className="font-medium mb-2">Test PDfs</p>
-						1.{" "}
-						<a
-							href="/pdf?url=https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf"
-							className="text-indigo-600 hover:text-indigo-700 transition-colors"
-						>
-							ON THE LINE
-						</a>
-						<br />
-						2.{" "}
-						<a
-							href="/pdf?url=https://www.aeee.in/wp-content/uploads/2020/08/Sample-pdf.pdf"
-							className="text-indigo-600 hover:text-indigo-700 transition-colors"
-						>
-							AEEE
-						</a>
-						<br />
-						3.{" "}
-						<a
-							href="/pdf?url=https://pdfobject.com/pdf/sample.pdf"
-							className="text-indigo-600 hover:text-indigo-700 transition-colors"
-						>
-							PDF OBJECT
-						</a>
-						<br />
-						4.{" "}
-						<button
-							type="button"
-							className="text-indigo-600 hover:text-indigo-700 transition-colors cursor-pointer"
-							onClick={() => setPdfSource("/image-doc.pdf")}
-						>
-							With Images
-						</button>{" "}
-						<br />
-						5.{" "}
-						<button
-							type="button"
-							className="text-indigo-600 hover:text-indigo-700 transition-colors cursor-pointer"
-							onClick={() => setPdfSource("/sample-report.pdf")}
-						>
-							Report
-						</button>{" "}
-						<br />
-					</div>
-
-					{/* URL Input Section */}
-					<div className="bg-linear-to-r from-slate-50 to-blue-50 rounded-xl p-3 sm:p-4 border border-slate-200">
-						<h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-slate-700 flex items-center gap-2">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="w-4 h-4 sm:w-5 sm:h-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-label="Link Icon"
-							>
-								<title>Link</title>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-								/>
-							</svg>
-							Load PDF from URL
-						</h2>
-						<div className="flex flex-col gap-2 sm:gap-3">
-							<input
-								type="text"
-								value={customUrl}
-								onChange={(e) => setCustomUrl(e.target.value)}
-								placeholder="https://example.com/document.pdf"
-								className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-								onKeyDown={(e) => {
-									if (e.key === "Enter") {
-										handleLoadCustomUrl();
-									}
-								}}
-							/>
-							<div className="flex flex-col sm:flex-row gap-2">
+						<ol className="list-inside list-decimal">
+							<li>
 								<button
 									type="button"
-									onClick={handleLoadCustomUrl}
-									disabled={!customUrl.trim()}
-									className="flex-1 px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-lg whitespace-nowrap"
+									className="text-indigo-600 hover:text-indigo-700 transition-colors cursor-pointer"
+									onClick={() =>
+										setPdfSource(
+											"https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf",
+										)
+									}
 								>
-									🚀 Load URL
+									Original sample
 								</button>
-								{url && (
-									<button
-										type="button"
-										onClick={handleLoadLocal}
-										className="flex-1 px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-linear-to-r from-slate-600 to-slate-700 text-white rounded-lg hover:from-slate-700 hover:to-slate-800 transition-all font-medium shadow-md hover:shadow-lg whitespace-nowrap"
-									>
-										🔄 Reset
-									</button>
-								)}
-							</div>
-						</div>
+							</li>
+							<li>
+								<button
+									type="button"
+									className="text-indigo-600 hover:text-indigo-700 transition-colors cursor-pointer"
+									onClick={() => setPdfSource("/image-doc.pdf")}
+								>
+									With Images
+								</button>
+							</li>
+							<li>
+								<button
+									type="button"
+									className="text-indigo-600 hover:text-indigo-700 transition-colors cursor-pointer"
+									onClick={() => setPdfSource("/sample-report.pdf")}
+								>
+									Report
+								</button>
+							</li>
+							<br />
+						</ol>
 					</div>
 
 					{error && (
