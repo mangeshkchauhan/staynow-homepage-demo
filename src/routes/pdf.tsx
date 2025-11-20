@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -20,12 +20,14 @@ function PDFViewer() {
 	const { url } = Route.useSearch();
 	const [numPages, setNumPages] = useState<number | null>(null);
 	const [error, setError] = useState<string | null>(null);
-	const [customUrl, setCustomUrl] = useState("");
 	const [pageWidth, setPageWidth] = useState<number>(800);
 	const [pdfSource, setPdfSource] = useState<string | null>(
 		url ||
 			"https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf",
 	);
+	const [searchText, setSearchText] = useState("");
+	const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+	const pageRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
 	// Handle responsive width
 	useEffect(() => {
@@ -49,14 +51,64 @@ function PDFViewer() {
 		setError(`Failed to load PDF: ${error.message}`);
 	};
 
-	const handleLoadCustomUrl = () => {
-		if (customUrl.trim()) {
-			window.location.href = `/pdf?url=${encodeURIComponent(customUrl)}`;
-		}
+	// Search functionality
+	const highlightPattern = (text: string, pattern: string) => {
+		if (!pattern.trim()) return text;
+		const regex = new RegExp(`(${pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+		return text.replace(regex, (match) => `<mark class="bg-yellow-300">${match}</mark>`);
 	};
 
-	const handleLoadLocal = () => {
-		window.location.href = "/pdf";
+	const textRenderer = (textItem: { str: string }) => {
+		if (!searchText.trim()) return textItem.str;
+		return highlightPattern(textItem.str, searchText);
+	};
+
+	const handleSearch = (value: string) => {
+		setSearchText(value);
+		setCurrentMatchIndex(0);
+		
+		if (!value.trim()) {
+			return;
+		}
+
+		// Scroll to first match after a brief delay to allow rendering
+		setTimeout(() => {
+			const firstMark = document.querySelector('mark');
+			if (firstMark) {
+				firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		}, 300);
+	};
+
+	const navigateMatch = (direction: 'next' | 'prev') => {
+		const marks = document.querySelectorAll('mark');
+		if (marks.length === 0) return;
+
+		let newIndex = currentMatchIndex;
+		if (direction === 'next') {
+			newIndex = (currentMatchIndex + 1) % marks.length;
+		} else {
+			newIndex = currentMatchIndex === 0 ? marks.length - 1 : currentMatchIndex - 1;
+		}
+
+		setCurrentMatchIndex(newIndex);
+		marks[newIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		
+		// Highlight current match differently
+		marks.forEach((mark, idx) => {
+			if (idx === newIndex) {
+				mark.classList.add('bg-orange-400');
+				mark.classList.remove('bg-yellow-300');
+			} else {
+				mark.classList.add('bg-yellow-300');
+				mark.classList.remove('bg-orange-400');
+			}
+		});
+	};
+
+	const totalMatches = () => {
+		if (!searchText.trim()) return 0;
+		return document.querySelectorAll('mark').length;
 	};
 
 	return (
@@ -131,6 +183,119 @@ function PDFViewer() {
 						</ol>
 					</div>
 
+					{/* Search Bar */}
+					<div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
+						<div className="flex flex-col sm:flex-row gap-3">
+							<div className="flex-1 relative">
+								<input
+									type="text"
+									value={searchText}
+									onChange={(e) => handleSearch(e.target.value)}
+									placeholder="Search in PDF..."
+									className="w-full px-4 py-2 pl-10 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+								/>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									aria-label="Search Icon"
+								>
+									<title>Search</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+									/>
+								</svg>
+							</div>
+							
+							{searchText && (
+								<div className="flex items-center gap-2">
+									<span className="text-sm text-slate-600 whitespace-nowrap">
+										{totalMatches()} {totalMatches() === 1 ? 'match' : 'matches'}
+									</span>
+									<button
+										type="button"
+										onClick={() => navigateMatch('prev')}
+										disabled={totalMatches() === 0}
+										className="p-2 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+										title="Previous match"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-4 h-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											aria-label="Previous Match"
+										>
+											<title>Previous Match</title>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M15 19l-7-7 7-7"
+											/>
+										</svg>
+									</button>
+									<button
+										type="button"
+										onClick={() => navigateMatch('next')}
+										disabled={totalMatches() === 0}
+										className="p-2 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+										title="Next match"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-4 h-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											aria-label="Next Match"
+										>
+											<title>Next Match</title>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M9 5l7 7-7 7"
+											/>
+										</svg>
+									</button>
+									<button
+										type="button"
+										onClick={() => {
+											setSearchText('');
+											setCurrentMatchIndex(0);
+										}}
+										className="p-2 bg-white border border-slate-300 rounded-lg hover:bg-red-50 hover:border-red-300 transition-colors"
+										title="Clear search"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-4 h-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											aria-label="Clear Search"
+										>
+											<title>Clear Search</title>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M6 18L18 6M6 6l12 12"
+											/>
+										</svg>
+									</button>
+								</div>
+							)}
+						</div>
+					</div>
+
 					{error && (
 						<div className="mt-4 p-3 sm:p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg shadow-sm">
 							<div className="flex items-start gap-2">
@@ -180,11 +345,15 @@ function PDFViewer() {
 											key={`page_${index + 1}`}
 											className="mb-3 sm:mb-4 w-full flex justify-center"
 										>
-											<div className="relative group">
+											<div 
+												className="relative group"
+												ref={(el) => { pageRefs.current[index + 1] = el; }}
+											>
 												<Page
 													pageNumber={index + 1}
 													renderTextLayer={true}
 													renderAnnotationLayer={true}
+													customTextRenderer={textRenderer}
 													className="shadow-lg sm:shadow-xl rounded-lg overflow-hidden border border-slate-200 transition-transform duration-200 hover:shadow-2xl"
 													width={pageWidth}
 												/>
